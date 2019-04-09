@@ -7,18 +7,37 @@ class Login extends Component {
     return (
       <div className="Login">
         <header>
-          Test
+          
           <nav>
             
           </nav>
         </header>
 
         <body>
-          <button>New button</button>
+          <form>
+            <span>
+              Veuillez vous identifier pour continuer 
+            </span>
+            <br></br>
+            <br></br>
+
+
+            <div>
+              <input class="input100" type="text" name="email" placeholder='Email'></input>
+            </div>
+
+            <div>
+             <input class="input100" type="password" name="pass" placeholder='Mot de passe'></input>
+            </div>
+
+            <br></br>
+
+            <button class="primary"> Login</button>
+          </form>          
         </body>
 
         <footer>
-          Test2
+          
         </footer>
       </div>
     );

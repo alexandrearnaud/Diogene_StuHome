@@ -22,7 +22,7 @@ class App extends Component {
         <a class="nav-link" href="/">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Connexion</a>
+        <a class="nav-link" href="Login">Connexion</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Inscription</a>
