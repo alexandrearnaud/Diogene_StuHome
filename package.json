@@ -15,6 +15,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "firebase": "firebase"
+    
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,6 +31,7 @@
   "devDependencies": {
     "firebase-tools": "^6.5.0"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "AndyBruh <andypsn9@outlook.fr>",
+  "license": "ISC",
+  "repository": "https://github.com/alexandrearnaud/Diogene_StuHome.git"
 }
