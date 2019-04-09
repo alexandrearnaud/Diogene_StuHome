@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import logo from './logo.svg';
-import './bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
 class App extends Component {
@@ -19,7 +19,7 @@ class App extends Component {
           <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
     <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="/">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Connexion</a>
@@ -54,9 +54,9 @@ class App extends Component {
 
        <div id="link">
 
-       <li><a href="andy.agban@gmail.com">Contactez nous</a></li>
-       <li><a href="#">Mention légales</a></li>
-       <li><a href="#">CGV</a></li>
+       <li><a href="ContactezNous">Contactez nous</a></li>
+       <li><a href="MentionsLegales">Mention légales</a></li>
+       <li><a href="CGV">CGV</a></li>
 
        </div>
     
