@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import { Container } from 'react-bootstrap';
 import Header from './Header'
 import Footer from './Footer'
 import App from './App';
@@ -14,6 +15,7 @@ export default function MainRouter () {
     return (
         <BrowserRouter>
             <Header/>
+            <Container>
                 <Switch>
                     <Route exact path="/" component={App}/>
                     <Route exact path="/QuiSommesNous" component={QuiSommesNous}/>
@@ -21,6 +23,7 @@ export default function MainRouter () {
                     <Route exact path="/MentionsLegales" component={MentionsLegales}/>
                     <Route exact path="/ContactezNous" component={ContactezNous}/>
                 </Switch>
+                </Container>
             <Footer/>
         </BrowserRouter>
     )
