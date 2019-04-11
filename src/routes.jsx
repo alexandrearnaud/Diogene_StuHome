@@ -10,6 +10,7 @@ import QuiSommesNous from './QuiSommesNous';
 import CGV from './CGV';
 import MentionsLegales from './MentionsLegales';
 import ContactezNous from './ContactezNous';
+import Login from './Login';
 
 export default function MainRouter () {
     return (
@@ -18,6 +19,7 @@ export default function MainRouter () {
             <Container>
                 <Switch>
                     <Route exact path="/" component={App}/>
+                    <Route exact path="/Login" component={Login}/>
                     <Route exact path="/QuiSommesNous" component={QuiSommesNous}/>
                     <Route exact path="/CGV" component={CGV}/>
                     <Route exact path="/MentionsLegales" component={MentionsLegales}/>
