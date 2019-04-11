@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Link, Route} from 'react-router-dom'
+import {Link, Route} from 'react-router-dom';
+import logo from './logo.svg'
 
 class Header extends Component {
     render() {
@@ -8,7 +9,7 @@ class Header extends Component {
                     <header>
                     
                         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                            <a class="navbar-brand" img src="/pic/StuHome.png"></a>
+                            <a class="navbar-brand" img src={logo}></a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                             </button>

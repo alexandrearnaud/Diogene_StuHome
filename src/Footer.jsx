@@ -9,9 +9,12 @@ class Footer extends Component {
 
                         <div id="link">
 
-                        <li><a href="ContactezNous">Contactez nous</a></li>
-                        <li><a href="MentionsLegales">Mention légales</a></li>
+                        <li><a href="QuiSommesNous">Qui sommes-nous ?</a></li>
+                        <li><a href="ContactezNous">Contactez-nous</a></li>
+                        <li><a href="MentionsLegales">Mentions légales</a></li>
                         <li><a href="CGV">CGV</a></li>
+                        
+                        <li> &#9400; Diogène - 2019 </li>
 
                         </div>
 
