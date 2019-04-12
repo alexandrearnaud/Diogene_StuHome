@@ -11,6 +11,8 @@ import CGV from './CGV';
 import MentionsLegales from './MentionsLegales';
 import ContactezNous from './ContactezNous';
 import Login from './Login';
+import TemplateFiche from './TemplateFiche';
+import Inscription from './Inscription';
 
 export default function MainRouter () {
     return (
@@ -24,6 +26,8 @@ export default function MainRouter () {
                     <Route exact path="/CGV" component={CGV}/>
                     <Route exact path="/MentionsLegales" component={MentionsLegales}/>
                     <Route exact path="/ContactezNous" component={ContactezNous}/>
+                    <Route exact path="/TemplateFiche" component={TemplateFiche}/>
+                    <Route exact path="/Inscription" component={Inscription}/>
                 </Switch>
             </Container>
             <Footer/>

@@ -41,6 +41,9 @@ class Header extends Component {
                                 <li class="nav-item">
                                     <a class="nav-link"> <Link to="/DevenirHote" style={LinkStyle}> Devenir Hote </Link></a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"> <Link to="/TemplateFiche" style={LinkStyle}> Template fiche </Link></a>
+                                </li>
                                 </ul>
                             
                                 <form class="form-inline my-2 my-lg-0">
