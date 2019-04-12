@@ -8,69 +8,13 @@ class ContactezNous extends Component {
     return (
       <div className="ContactezNous">
       <h1> Contactez-nous </h1>
-      <br/>
-        <Form>
-          {/* Adresse Mail  */}
-          <Form.Group as={Row} controlId="formHorizontalEmail">
-            <Form.Label column sm={2}>
-              Email
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Control type="email" placeholder="Email" />
-            </Col>
-          </Form.Group>
-
-          {/* Nom  */}
-          <Form.Group as={Row} controlId="formHorizontalNom">
-            <Form.Label column sm={2}>
-              Nom
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Control type="text" placeholder="Nom" />
-            </Col>
-          </Form.Group>
-
-          {/* Prénom  */}
-          <Form.Group as={Row} controlId="formHorizontalPrenom">
-            <Form.Label column sm={2}>
-              Prénom
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Control type="text" placeholder="Prénom" />
-            </Col>
-          </Form.Group>
-
-          {/* Objet du message  */}
-          <Form.Group as={Row} controlId="formHorizontalObjetMsg">
-            <Form.Label column sm={2}>
-              Objet
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Control as="select">
-                <option> J'ai besoin d'aide pour la connexion à mon compte</option>
-                <option> Je n'arrive pas à réserver un logement </option>
-                <option> Je souhaite signaler un comportement inapproprié ou du contenu sensible</option>
-                <option> Je souhaite signaler un problème de propriété intellectuelle</option>
-              </Form.Control>
-            </Col>
-          </Form.Group>
-
-          {/* Message  */}
-          <Form.Group as={Row} controlId="formHorizontalMessage">
-            <Form.Label column sm={2}>
-              Message
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Control as="textarea" rows="5" />
-            </Col>
-          </Form.Group>
-
-          <Form.Group as={Row}>
-            <Col sm={{ span: 10, offset: 2 }}>
-              <Button type="submit"> Envoyer </Button>
-            </Col>
-          </Form.Group>
-        </Form>
+        <p>&nbsp;</p>
+        <h3>Diog&egrave;ne</h3>
+        <p>2 all&eacute;e Louis de Brooglie,</p>
+        <p>74000 Annecy</p>
+        <p>&nbsp;</p>
+        <p>Tel: 04.25.36.xx.xx</p>
+        <p>mail : diog&egrave;ne@stuhome.com</p>
       </div>
     );
   }
