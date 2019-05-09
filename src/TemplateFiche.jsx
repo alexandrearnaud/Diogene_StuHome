@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import appart from './img/appart1.jpg';
 import appart2 from './img/appart2.jpg';
 import appart3 from './img/appart3.jpg';
-import { Container, Card, Row, Col, Carousel } from 'react-bootstrap';
-import { IoIosHome, IoIosMedal, IoLogoEuro } from 'react-icons/io';
+import personne from './img/personne.jpg';
+import { Container, Card, Row, Col, Carousel, Image } from 'react-bootstrap';
+import { IoIosHome, IoIosMedal, IoLogoEuro, IoIosPhotos } from 'react-icons/io';
 
 
 class TemplateFiche extends Component {
@@ -57,18 +58,24 @@ class TemplateFiche extends Component {
                     </Row>
                     <Row>
                         <Col xs={6}><p>Annecy</p> </Col>
-                        <Col xs={5}></Col>
+                        <Col xs={5}> </Col>
                         <Col></Col>
                     </Row>
                     <Row>
                         <Col xs={6}><IoIosHome/> Loft entier </Col>
-                        <Col xs={5}></Col>
-                        <Col></Col>
+                        <Col xs={4}></Col>
+                        <Col xs={2} style={{
+    justifyContent: 'center',
+    alignItems: 'center'}}> <Image 
+                        src={personne}
+                        style={{height: "100%", width: "40%"}} roundedCircle
+                        />
+                        </Col>
                     </Row>
                     <Row>
                         <Col xs={6}><p> 11 voyageurs - 4 chambres - 9 lits - 3 salles de bain</p> </Col>
-                        <Col xs={5}></Col>
-                        <Col></Col>
+                        <Col xs={4}></Col>
+                        <Col style={{textAlign: "center"}}> Jean-Christophe</Col>
                     </Row>
                     <Row>
                         <Col xs={6}><p> <IoIosMedal/> Frank est un SuperHôte </p> </Col>

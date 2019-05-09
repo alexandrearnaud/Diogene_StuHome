@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Form, Col, Row, Button} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import { Form, Col, Row, Button, FormLabel} from 'react-bootstrap';
 
 
 class Inscription extends Component {
@@ -19,10 +20,10 @@ class Inscription extends Component {
             </Form.Group>
                 <Form.Group as={Col} controlId="formGridEmail">
                   <Form.Label>Prénom</Form.Label>
-                  <Form.Control type="Text" placeholder="Prenom" />
+                  <Form.Control type="Text" placeholder="Prénom" />
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridPassword">
-                  <Form.Label>Date</Form.Label>
+                  <Form.Label>Date de naissance</Form.Label>
                   <Form.Control type="date" />
                 </Form.Group>
             </Form.Row>
@@ -60,7 +61,7 @@ class Inscription extends Component {
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridState">
-              <Form.Label>Etat</Form.Label>
+              <Form.Label>Pays</Form.Label>
               <Form.Control as="select">
                 <option value="France" selected="selected">France </option>
 
@@ -320,7 +321,17 @@ class Inscription extends Component {
             </Form.Row>
 
           <Form.Group id="formGridCheckbox">
-            <Form.Check type="checkbox" label="J'accepte les conditions d'utilisation" />
+            {['checkbox'].map(type => (
+              <div key={`inline-${type}`} className="mb-3">
+                <Form.Check
+                  inline
+                  disabled
+                  type={type}
+                  id={`inline-${type}-3`}
+                />
+                <FormLabel> J'accepte les <a href="/CGV"> Conditions Générales de Ventes </a> du site StuHome.com</FormLabel>
+              </div>
+            ))}
           </Form.Group>
 
           <Button variant="primary" type="submit">
