@@ -66,10 +66,10 @@ class TemplateFiche extends Component {
                         <Col xs={4}></Col>
                         <Col xs={2} style={{
     justifyContent: 'center',
-    alignItems: 'center'}}> <Image 
+    alignItems: 'center'}}> <a href="../TemplateProfil"><Image 
                         src={personne}
                         style={{height: "100%", width: "40%"}} roundedCircle
-                        />
+                        /></a>
                         </Col>
                     </Row>
                     <Row>
