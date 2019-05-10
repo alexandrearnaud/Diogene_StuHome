@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import { Form, Col, Row, Button} from 'react-bootstrap';
 // import firebase from './firebase-app';
 //import 'firebase/auth';
-import firebase from './config/firebase';
+import fire from './Fire';
 /*
 async function doSignIn() {
   try {
@@ -51,7 +51,7 @@ class Login extends Component {
 
   login(e) {
     e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
     }).catch((error) => {
         console.log(error);
       });

@@ -140,11 +140,13 @@ return (
             </Form.Group>
                 <Form.Group as={Col} controlId="formGridfirtsname" >
                   <Form.Label>Prénom</Form.Label>
+
                   <Form.Control type="Text" onChange={this.handleChange} placeholder="Prenom" value={this.state.firstname} name="firstname"/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridDate" >
                   <Form.Label>Date</Form.Label>
                   <Form.Control type="date" onChange={this.handleChange} value={this.state.dateOfBirth} name="dateOfBirth"/>
+
                 </Form.Group>
             </Form.Row>
           <Form.Row>
@@ -168,28 +170,30 @@ return (
 
           <Form.Group controlId="formGridAddress" >
             <Form.Label>Adresse</Form.Label>
-            <Form.Control type='Text' placeholder='' onChange={this.handleChange} value={this.state.address} name="Address"/>
+            <Form.Control type='Text' placeholder='' onChange={this.handleChange} value={this.state.address} name='address'/>
           </Form.Group>
 
           <Form.Group controlId="formGridAddress2">
             <Form.Label>Adresse 2</Form.Label>
-            <Form.Control type='Text' placeholder="Appartement, Rue, Etage" onChange={this.handleChange}  value={this.state.firstname}/>
+            <Form.Control type='Text' placeholder="Appartement, Rue, Etage" onChange={this.handleChange} name='adress2'/>
           </Form.Group>
 
           <Form.Row>
             <Form.Group as={Col} controlId="formGridCity" >
               <Form.Label>Ville</Form.Label>
-              <Form.Control  type='Text' onChange={this.handleChange} value={this.state.city} name='City'/>
+              <Form.Control  type='Text' onChange={this.handleChange} value={this.state.city} name='city' />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridZip" >
               <Form.Label>Code Postal</Form.Label>
-              <Form.Control  type='Text' onChange={this.handleChange} value={this.state.zipCode} name='zipCode'/>
+              <Form.Control  type='Text' onChange={this.handleChange} value={this.state.zipCode} name='zipCode' />
             </Form.Group>
+
 
             <Form.Group as={Col} controlId="formGridState" >
               <Form.Label>Etat</Form.Label>
               <Form.Control as="select" onChange={this.handleChange} value={this.state.country}>
+
                 <option value="France" selected="selected">France </option>
 
                 <option value="Afghanistan">Afghanistan </option>
@@ -448,7 +452,9 @@ return (
             </Form.Row>
 
           <Form.Group id="formGridCheckbox">
-            <Form.Check type="checkbox" label="J'accepte les conditions d'utilisation" />
+                <Form.Check/>
+                <Form.Label> J'accepte les Conditions Générales de Ventes  du site StuHome com</Form.Label>
+             
           </Form.Group>
           
       
