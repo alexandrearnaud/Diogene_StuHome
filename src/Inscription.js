@@ -1,67 +1,195 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Form, Col, Row, Button} from 'react-bootstrap';
+import fire from './Fire';
 
+
+
+  
 
 class Inscription extends Component {
-    
-    
+
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.signUp = this.signUp.bind(this);
+    this.state = {
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
+      username: '',
+      dateOfBirth: '',
+      gender: '',
+      address: '',
+      telephone: '',
+      type: '',
+      zipCode: '',
+      city: '', 
+      country: '',
+    }
+  }
+
+  handleChange(e){
+    this.setState ({ [e.target.name] : e.target.value});
+  }
+
+  authListener() {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user){ 
+        this.setState({ user });
+      } else {
+        this.setState({ user : null });
+      }
+    });
+  }
+
+  handleSubmit(e){
+    e.preventDefault()
+    console.log(this.state);
+  }
+
+  signUp(e){
+    e.preventDefault();
+    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((result) => {
+      if(result){ 
+        var newUser = {};
+        newUser.firstname = this.state.firstname;
+        newUser.lastname = this.state.lastname;
+        newUser.email = this.state.email;
+        newUser.password = this.state.password;
+        newUser.username = this.state.username;
+        newUser.dateOfBirth = this.state.dateOfBirth;
+        newUser.gender = this.state.gender;
+        newUser.address = this.state.address;
+        newUser.telephone = this.state.telephone;
+        newUser.type = this.state.type;
+        newUser.zipCode = this.state.zipCode;
+        newUser.city = this.state.city;
+        newUser.country = this.state.country
+        console.log(result)
+        fire.firestore().collection("user").doc(result.user.uid).set(newUser).catch(function (error){
+          console.error("Error adding document: ", error);
+        });
+      }
+    }).catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if(errorCode == 'auth/weak-password') {
+        alert('Password is False');
+      } else {
+       alert(errorMessage);
+      }  
+    });
+  }
+
+ 
+
+  /*submitData(event) {
+    event.preventDefault();
+    fire
+      .database()
+      .ref(`Newdata/${this.state}`)
+      .set({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password,
+        username: this.state.username,
+        dateOfBirth: this.state.dateOfBirth,
+        gender: this.state.gender,
+        address: this.state.address,
+        telephone: this.state.telephone,
+        type: this.state.type,
+        zipCode: this.state.zipCode,
+        city: this.state.city,
+        country: this.state.country
+      })
+      .catch(error => console.log(error));
+  }*/
+
+  /*inputData(event) {
+    const firstName = this.refs.name1.value;
+    const lastName = this.refs.name2.value;
+    const email = this.refs.name3.value;
+    const password = this.refs.name4.value;
+    const username = this.refs.name5.value;
+    const dateOfBirth = this.refs.name6.value;
+    const gender = this.refs.name7.value;
+    const address = this.refs.name8.value;
+    const telephone = this.refs.name9.value;
+    const type = this.refs.name10.value;
+    const zipCode = this.refs.name11.value;
+    const city = this.refs.name12.value;
+    const country = this.refs.name13.value;
+    this.setState({ firstName, lastName, email, password, username, dateOfBirth, gender, address, telephone, type, zipCode, city, country  });
+  }*/
+ 
   render() {
-    return (
-      <div className="Inscription">
+
+return (
+          
+    <div id="Ins">
         <h1> Inscription </h1>
         <br/>
         <Form>
           <Form.Row>
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group as={Col} controlId="formGridlastname" >
               <Form.Label>Nom</Form.Label>
-              <Form.Control type="Text" placeholder="Nom" />
+              <Form.Control type="Text" placeholder="Nom" onChange={this.handleChange} value={this.state.lastname} name="lastname"/>
             </Form.Group>
-                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Group as={Col} controlId="formGridfirtsname" >
                   <Form.Label>Prénom</Form.Label>
-                  <Form.Control type="Text" placeholder="Prenom" />
+                  <Form.Control type="Text" onChange={this.handleChange} placeholder="Prenom" value={this.state.firstname} name="firstname"/>
                 </Form.Group>
-                <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Group as={Col} controlId="formGridDate" >
                   <Form.Label>Date</Form.Label>
-                  <Form.Control type="date" />
+                  <Form.Control type="date" onChange={this.handleChange} value={this.state.dateOfBirth} name="dateOfBirth"/>
                 </Form.Group>
             </Form.Row>
           <Form.Row>
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group as={Col} controlId="formGridEmail" >
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" placeholder="Entrez votre email" />
+              <Form.Control type="email" placeholder="Entrez votre email" onChange={this.handleChange} value={this.state.email} name="email" />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridPassword">
-              <Form.Label>Mot de Passe</Form.Label>
-              <Form.Control type="password" placeholder="Mot de Passe" />
+            <Form.Group as={Col} controlId="formGridUsername" >
+              <Form.Label>Nom Utilisateur</Form.Label>
+              <Form.Control type="Text" placeholder="Nom Utilisateur"  onChange={this.handleChange} value={this.state.username} name="username"/>
             </Form.Group>
+
+            <Form.Group as={Col} controlId="formGridPassword" >
+              <Form.Label>Mot de Passe</Form.Label>
+              <Form.Control type="password" placeholder="Mot de Passe"  onChange={this.handleChange} value={this.state.password} name="password" />
+            </Form.Group>
+
+
           </Form.Row>
 
-          <Form.Group controlId="formGridAddress1">
+          <Form.Group controlId="formGridAddress" >
             <Form.Label>Adresse</Form.Label>
-            <Form.Control placeholder="" />
+            <Form.Control type='Text' placeholder='' onChange={this.handleChange} value={this.state.address} name="Address"/>
           </Form.Group>
 
           <Form.Group controlId="formGridAddress2">
             <Form.Label>Adresse 2</Form.Label>
-            <Form.Control placeholder="Appartement, Rue, Etage" />
+            <Form.Control type='Text' placeholder="Appartement, Rue, Etage" onChange={this.handleChange}  value={this.state.firstname}/>
           </Form.Group>
 
           <Form.Row>
-            <Form.Group as={Col} controlId="formGridCity">
+            <Form.Group as={Col} controlId="formGridCity" >
               <Form.Label>Ville</Form.Label>
-              <Form.Control />
+              <Form.Control  type='Text' onChange={this.handleChange} value={this.state.city} name='City'/>
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridZip">
+            <Form.Group as={Col} controlId="formGridZip" >
               <Form.Label>Code Postal</Form.Label>
-              <Form.Control />
+              <Form.Control  type='Text' onChange={this.handleChange} value={this.state.zipCode} name='zipCode'/>
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridState">
+            <Form.Group as={Col} controlId="formGridState" >
               <Form.Label>Etat</Form.Label>
-              <Form.Control as="select">
+              <Form.Control as="select" onChange={this.handleChange} value={this.state.country}>
                 <option value="France" selected="selected">France </option>
 
                 <option value="Afghanistan">Afghanistan </option>
@@ -322,15 +450,20 @@ class Inscription extends Component {
           <Form.Group id="formGridCheckbox">
             <Form.Check type="checkbox" label="J'accepte les conditions d'utilisation" />
           </Form.Group>
+          
+      
 
-          <Button variant="primary" type="submit">
+
+          <Button onClick={this.signUp} onChange={this.handleChange} variant="primary" type="submit">
             Envoyer
           </Button>
         </Form>
       </div>
     );
   }
- }
+ };
+
+
 
   
 export default Inscription;
