@@ -17,6 +17,7 @@ class TemplateProfil extends Component {
     return (
       <div className="TemplateProfil">
           <h1> Jean-Christophe </h1>
+          <h3> Type d'utilisateur</h3>
           
                 <Card.Body>
                 <Card.Text>
@@ -49,8 +50,8 @@ class TemplateProfil extends Component {
                     <br></br>
 
                     <Row>
-                        <Col style={{textAlign: "center"}} xs={10}><IoIosMedal/> SuperHôte</Col>
-                        <Col style={{textAlign: "justify"}} xs={10}><p> Les SuperHôtes sont des hôtes expérimentés qui bénéficient de très bonnes évaluations et qui s'engagent à offrir d'excellents séjours aux voyageurs. </p> </Col>
+                        <Col style={{textAlign: "center"}} xs={10}><IoIosMedal/> Badge  </Col>
+                        <Col style={{textAlign: "justify"}} xs={10}><p> Description du badge. Critères à remplir, explication de ce que cela implique pour le possesseur du badge et de ce que cela représente pour les autres utilisateurs. </p> </Col>
                     </Row>
                     
                     </Container>
