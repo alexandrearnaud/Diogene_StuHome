@@ -129,12 +129,14 @@ return (
 
                 <Form.Group as={Col} controlId="formGridfirtsname" >
                   <Form.Label>Prénom</Form.Label>
+
                   <Form.Control type="Text" onChange={this.handleChange} placeholder="Prenom" value={this.state.firstname} name="firstname"/>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridDate" >
                   <Form.Label>Date</Form.Label>
                   <Form.Control type="date" onChange={this.handleChange} value={this.state.dateOfBirth} name="dateOfBirth"/>
+
                 </Form.Group>
             </Form.Row>
 
