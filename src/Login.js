@@ -2,12 +2,47 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import { Form, Col, Row, Button} from 'react-bootstrap';
+// import firebase from './firebase-app';
+//import 'firebase/auth';
+import firebase from './Fire';
+import Home from './Home';
+import MainRouter from './routes';
+
+
 
 class Login extends Component {
+
+  constructor(props) {
+    super(props);
+    this.login = this.login.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      email:'',
+      password:''
+    };
+  };
+
+  login(e) {
+    e.preventDefault();
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+    }).catch((error) => {
+        console.log(error);
+      });
+  }
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
   render() {
     return (
       <div className="Login">
       <h1> Connectez-vous à votre compte </h1>
+
+     
+
+
+
       <br/>
         <Form>
           {/* Adresse Mail  */}
@@ -47,5 +82,8 @@ class Login extends Component {
     );
   }
 }
+
+
+
 
 export default Login;

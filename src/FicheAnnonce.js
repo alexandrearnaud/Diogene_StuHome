@@ -1,24 +1,56 @@
+import { firebase } from './Fire';
+import { storage } from './Fire';
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import appart from './img/appart1.jpg';
-import appart2 from './img/appart2.jpg';
-import appart3 from './img/appart3.jpg';
-import personne from './img/personne.jpg';
-import { Container, Card, Row, Col, Carousel, Image } from 'react-bootstrap';
-import { IoIosHome, IoIosMedal, IoLogoEuro, IoIosPhotos } from 'react-icons/io';
+import { Form, Col, Row, Button} from 'react-bootstrap';
+import Select from 'react-select';
 
 
-class TemplateFiche extends Component {
-  render() {
-    const CardStyle = {
-        width: "20%", 
-        height: "20%"
-      }
-    return (
-      <div className="TemplateFiche">
-          <h1> Template fiche </h1>
-          <>
-            <Card className="CardStyle">
+class FicheAnnonce extends React.Component{
+
+    constructor(props){
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.retriveData = this.retriveData.bind(this);
+        this.state = {
+
+          title:'',
+          city:'',
+          typehab:'',
+          price:'',
+          NbRoom:'',
+          NbBed:'',
+          image: null,
+          url: '',
+
+        }
+        
+    }
+
+    retriveData(e){
+         e.preventDefault();
+         let PostHRef = firebase.firestore.collection('PostHab');
+         let query = PostHRef.where('title', '==', true).doc().get()
+        .then(snapshotTi  => {
+        if (snapshotTi.empty) {
+      console.log('No matching value.');
+      return;
+    }  
+    snapshot.forEach(doc => {
+      console.log(doc.id, '=>', doc.data());
+    });
+  })
+  .catch(err => {
+    console.log('Error getting documents', err);
+  });
+    }
+   
+    
+
+
+    render(){
+        return (
+            <div className="FicheA">
+                <Card className="CardStyle">
             <Carousel>
               <Carousel.Item>
                 <img
@@ -54,7 +86,7 @@ class TemplateFiche extends Component {
                     <Row>
                         <Col xs={6}><h1> Appart n°1 </h1></Col>
                         <Col xs={3}> <IoIosMedal/> SuperHôte</Col>
-                        <Col xs={3}> <IoLogoEuro/> <strong> Prix : </strong>  45€ / nuit</Col>
+                        <Col xs={3}> <IoLogoEuro/> <strong> Prix : </strong>  {}€ / nuit</Col>
                     </Row>
                     <Row>
                         <Col xs={6}><p>Annecy</p> </Col>
@@ -91,11 +123,11 @@ class TemplateFiche extends Component {
                 </Card.Text>
                 </Card.Body>
             </Card>
-            <br />
-            </>
-      </div>
-    );
-  }
+            </div>
+        )
+    }
+
+
 }
 
-export default TemplateFiche;
+export default FicheAnnonces;

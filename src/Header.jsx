@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link, Route} from 'react-router-dom';
 import logo from './img/logo3.png';
-
+import firebase from './Fire';
 
 class Header extends Component {
     render() {
@@ -39,15 +39,26 @@ class Header extends Component {
                                     <a class="nav-link"> <Link to="/Inscription" style={LinkStyle}> Inscription </Link></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link"> <Link to="/DevenirHote" style={LinkStyle}> Devenir Hote </Link></a>
+                                    <a class="nav-link"> <Link to="/Annonces" style={LinkStyle}> Annonces </Link></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link"> <Link to="/TemplateFiche" style={LinkStyle}> Template fiche </Link></a>
+                                    <a class="nav-link"> <Link to="/TemplateFiche" style={LinkStyle}> TemplateAnnonce </Link></a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link"> <Link to="/TemplateProfil" style={LinkStyle}> Template Profil </Link></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"> <Link to="/PostAnnonces" style={LinkStyle}> Poster une Annonce </Link></a>
+                                </li>
+
                                 </ul>
                             
+                                <form class="form-inline my-1 my-lg-1">
+                                <button class="btn btn-secondary my-2 my-sm-0" type="submit" onClick={this.signOut}> Deconnexion </button>
+                                </form>
+
                                 <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Recherche"></input>
                                 <button class ="btn btn-secondary my-2 my-sm-0" type="submit">Recherche</button>
                                 </form>
 

@@ -5,12 +5,43 @@ import annecy2 from './img/annecy2.jpg';
 import annecy3 from './img/annecy3.jpg';
 import './App.css';
 import Carousel from 'react-bootstrap/Carousel';
-
+import firebase from './Fire';
+import Login from './Login';
+import Home from './Home';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      user:{},
+    }
+  }
+  
+  componentDidMount(){
+    this.authListener();
+  }
+  
+  authListener() {
+    firebase.auth().onAuthStateChanged((user) => {
+      //console.log(user);
+      if (user) {
+        this.setState({ user });
+        //localStorage.setItem('user', user.uid);
+      } else {
+        this.setState({ user: null });
+        //localStorage.removeItem('user');
+      }
+    }); 
+  }
+
+  // A faire : rajotuer un fichier home et ne pas logger comme dans la vidéo
+
   render() {
     return (
       <div className="Home">
+      
+//https://www.youtube.com/watch?v=r4EsP6rovwk
+
           <h1> Bienvenue sur notre site Stuhome </h1>
           <div style={{width: "100%"}}>
             <Carousel>
