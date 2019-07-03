@@ -21,7 +21,7 @@ import Administration from './Administration';
 import Profil from './Profil';
 import Navigation from './Navigation';
 import PostAnnonces from './PostAnnonces';
-import Test from './TestsenData';
+//import Test from './TestsenData';
 import Annonces from './Annonces';
 
 
@@ -29,7 +29,7 @@ const MainRouter = () => {
     const [user, setUser] = useState({authDone: false, isGuest: true, isAdmin: false});
 
     useEffect(() => firebase.auth().onAuthStateChanged(async authUser => {
-    console.log('here');
+    console.log(user);
     if(authUser != null) {
        
         const adminsnapshot = await firebase.firestore().collection('user').doc(authUser.uid).get().then[
@@ -97,18 +97,14 @@ const MainRouter = () => {
                 <Header user={user}/>
                 <Container>
                     <Switch>
-                        <Route exact path="/" component={Home}/>
-                    
+                        <Route exact path="/" render={(props) => <Home {...props} user={user} />}/>
                         <Route exact path="/TemplateFiche" component={TemplateFiche}/>
-                        
-                        
                         <Route exact path="/Home" component={Home}/>
                         <Route exact path="/Inscription" component={Inscription}/>
                         <Route exact path="/Login" component={Login}/>
                         <Route exact path="/ContactezNous" component={ContactezNous}/>
                         <Route exact path="/PostAnnonces" component={PostAnnonces}/>
                         <Route exact path="/Annonces" component={Annonces}/>
-                        <Route exact path="/TestsenData" component={Test}/>
                         <Route exact path="/Administration" component={Administration}/>
                         <Route exact path="/Reservation" component={Reservation}/> 
                         <Route exact path="/QuiSommesNous" component={QuiSommesNous}/>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { Redirect } from "react-router-dom";
 import logo from './logo.svg';
 import { Form, Col, Row, Button} from 'react-bootstrap';
 // import firebase from './firebase-app';
 //import 'firebase/auth';
-import firebase from './Fire';
+import {firebase} from './Fire';
 import Home from './Home';
 import MainRouter from './routes';
 
@@ -22,12 +23,19 @@ class Login extends Component {
     };
   };
 
-  login(e) {
+  async login(e) {
+    //console.log('logging in', this.state.email);
     e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-    }).catch((error) => {
-        console.log(error);
-      });
+    try {
+      const userCredential = await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
+      console.log('Vous êtes bien connecté au site', userCredential);
+      this.props.history.push("/");
+    } 
+    catch(error) {
+      console.log(error);
+      alert(`Vous n avez pas rentré le bon email ou le bon mot de passe: ${error.message}`);
+      this.props.history.push("/Login");
+    };
   }
 
   handleChange(e) {
@@ -39,9 +47,6 @@ class Login extends Component {
       <div className="Login">
       <h1> Connectez-vous à votre compte </h1>
 
-     
-
-
 
       <br/>
         <Form>
@@ -51,7 +56,7 @@ class Login extends Component {
               Email
             </Form.Label>
             <Col sm={10}>
-              <Form.Control type="email" placeholder="Email" />
+              <Form.Control name="email" type="email" placeholder="Email" onChange={this.handleChange}/>
             </Col>
           </Form.Group>
 
@@ -61,18 +66,18 @@ class Login extends Component {
               Mot de passe
             </Form.Label>
             <Col sm={10}>
-              <Form.Control type="text" placeholder="Mot de passe" />
+              <Form.Control name="password" type="password" placeholder="Mot de passe"  onChange={this.handleChange}/>
             </Col>
           </Form.Group>
           
           <div>
             <Form.Group as={Row}>
               <Col sm={{ span: 2, offset: 2 }}>
-                <Button type="submit"> Se connecter </Button>
+                <Button type="submit" onClick={this.login}> Se connecter </Button>
                 
               </Col>
               <Col sm={{ span: 4}}>
-                <Button onclick="window.location.href='www.google.fr'"> Mot de passe oublié </Button>
+                <Button onclick=""> Mot de passe oublié </Button>
               </Col>
             </Form.Group>
           </div>

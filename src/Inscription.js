@@ -105,10 +105,6 @@ class Inscription extends React.Component {
       }  
     });
   }
-
-
-
-
  
   render() {
 
