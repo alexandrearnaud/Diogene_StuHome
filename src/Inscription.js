@@ -26,6 +26,7 @@ class Inscription extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.signUp = this.signUp.bind(this);
     this.state = {
+      
       firstname: '',
       lastname: '',
       email: '',
@@ -41,6 +42,8 @@ class Inscription extends React.Component {
       country: '',
       selectedStatus: '',
       selectedOption : '',
+      url : '',
+      image : null,
      
     }
   }
@@ -48,6 +51,13 @@ class Inscription extends React.Component {
   handleChange(e) {
     this.setState ({ [e.target.name] : e.target.value });
   }
+
+  handleChangeImg = e => {
+    if(e.target.files[0]) {
+    const image = e.target.files[0];
+    this.setState({image});
+    }
+  } 
 
  
   
@@ -69,33 +79,51 @@ class Inscription extends React.Component {
     console.log(this.state);
   }
 
-  signUp(e){
+  async signUp(e){
     e.preventDefault();
-    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((result) => {
-      if(result){ 
-        var newUser = {};
-        newUser.firstname = this.state.firstname;
-        newUser.lastname = this.state.lastname;
-        newUser.email = this.state.email;
-        newUser.password = this.state.password;
-        newUser.username = this.state.username;
-        newUser.dateOfBirth = this.state.dateOfBirth;
-        newUser.gender = this.state.gender;
-        newUser.address = this.state.address;
-        newUser.telephone = this.state.telephone;
-        newUser.type = this.state.type;
-        newUser.zipCode = this.state.zipCode;
-        newUser.city = this.state.city;
-        newUser.country = this.state.selectedOption;
-        newUser.status = this.state.selectedStatus;
-        
-        console.log(result)
-        alert("Inscription terminée");
-        firebase.firestore().collection("user").doc(result.user.uid).set(newUser).catch(function (error){
-          console.error("Error adding document: ", error);
-        });
+    const {image} = this.state;
+    try {
+      const result = await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
+
+      if (!result) {
+        console.log('no create user result');
+        return;
       }
-    }).catch((error) => {
+
+      console.log('result:', result)
+
+      const imageRef = storage.ref().child(`images/${result.user.uid}`);
+      await imageRef.put(image);
+      const url = await imageRef.getDownloadURL();
+      console.log(url);
+      this.setState({ url });
+
+
+      var newUser = {};
+      newUser.firstname = this.state.firstname;
+      newUser.lastname = this.state.lastname;
+      newUser.email = this.state.email;
+      newUser.password = this.state.password;
+      newUser.username = this.state.username;
+      newUser.dateOfBirth = this.state.dateOfBirth;
+      newUser.gender = this.state.gender;
+      newUser.address = this.state.address;
+      newUser.telephone = this.state.telephone;
+      newUser.type = this.state.type;
+      newUser.zipCode = this.state.zipCode;
+      newUser.city = this.state.city;
+      newUser.country = this.state.selectedOption;
+      newUser.status = this.state.selectedStatus;
+      newUser.url = url;
+     
+      
+      alert("Inscription terminée");
+      try {
+        await firebase.firestore().collection('user').doc(result.user.uid).set(newUser);
+      } catch (error) {
+        console.error("Error adding document: ", error); 
+      };
+    } catch (error) {
       var errorCode = error.code;
       var errorMessage = error.message;
       if(errorCode == 'auth/weak-password') {
@@ -103,7 +131,7 @@ class Inscription extends React.Component {
       } else {
        alert(errorMessage);
       }  
-    });
+    }
   }
 
 
@@ -194,6 +222,11 @@ return (
             value={selectedOption}
             onChange={this.handleChangeCountry}
             options={options}/>
+           </Form.Group>
+
+           <Form.Group as={Col} controlId="FormImage">
+                  <Form.Label>Photo de Profil</Form.Label>
+                  <Form.Control type="file" onChange={this.handleChangeImg}/>
            </Form.Group>
           
             </Form.Row>

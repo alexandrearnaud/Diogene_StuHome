@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Form, Col, Row, Button} from 'react-bootstrap';
-import firebase from './Fire';
+import { firebase } from './Fire';
 
 const Navigation = (props) =>{
     
-    /*async function signout(event){
+    async function signOut(e){
         console.log("Deconnectez vous");
-        event.preventDefault();
-        await firebasebase.auth().signOut().then(function() {
+        e.preventDefault();
+        await firebase.auth().signOut().then(function() {
             console.log("Deconnction");
         }, function(error){
             console.error('Erreur pendant la deconnection', error);
@@ -20,7 +20,7 @@ const Navigation = (props) =>{
     function toProfil(){
         console.log('to profile');
         document.location.href = '/profil/${props.user.uid}';
-    }*/
+    }
     
     return(
         <div id ="nav">

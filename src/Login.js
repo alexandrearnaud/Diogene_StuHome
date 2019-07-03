@@ -25,6 +25,7 @@ class Login extends Component {
   login(e) {
     e.preventDefault();
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+      alert
     }).catch((error) => {
         console.log(error);
       });

@@ -23,7 +23,7 @@ class TemplateFiche extends Component {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src={appart}
+                  src={'https://firebasestorage.googleapis.com/v0/b/diogenestuhome.appspot.com/o/images%2Fdragon-age-inquisition-17012014-092315-002.jpg?alt=media&token=6053c2e1-94dd-4fbb-8cff-78df60d5c39e'}
                   style={{width: "100%", height: "100%"}}
                   alt="First slide"
                 />

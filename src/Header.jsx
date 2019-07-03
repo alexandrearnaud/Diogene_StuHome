@@ -2,14 +2,36 @@ import React, { Component } from 'react';
 import {Link, Route} from 'react-router-dom';
 import logo from './img/logo3.png';
 import firebase from './Fire';
+import MainRouter from './routes.js';
 
 class Header extends Component {
+    constructor(props){
+        super(props);
+        
+        
+      }
+
+       signOut(e){
+        console.log("Deconnectez vous");
+        e.preventDefault();
+        firebase.auth().signOut().then(function() {
+            console.log("Deconnction");
+        }, function(error){
+            console.error('Erreur pendant la deconnection', error);
+        });
+        document.location.href = '/';
+    };
+
     render() {
         const LinkStyle = {
             color : 'white', 
             textDecoration: 'none',
             paddingRight: '10px'
-          }
+          };
+
+       
+        
+        
 
         return (
                 <div className="Header">
@@ -38,15 +60,13 @@ class Header extends Component {
                                 <li class="nav-item">
                                     <a class="nav-link"> <Link to="/Inscription" style={LinkStyle}> Inscription </Link></a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link"> <Link to="/Annonces" style={LinkStyle}> Annonces </Link></a>
-                                </li>
+                            
                                 <li class="nav-item">
                                     <a class="nav-link"> <Link to="/TemplateFiche" style={LinkStyle}> TemplateAnnonce </Link></a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link"> <Link to="/TemplateProfil" style={LinkStyle}> Template Profil </Link></a>
+                                    <a class="nav-link"> <Link to="/FicheAnnonces" style={LinkStyle}> Fiche Annonce </Link></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link"> <Link to="/PostAnnonces" style={LinkStyle}> Poster une Annonce </Link></a>

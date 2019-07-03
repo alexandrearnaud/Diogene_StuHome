@@ -21,7 +21,7 @@ import Administration from './Administration';
 import Profil from './Profil';
 import Navigation from './Navigation';
 import PostAnnonces from './PostAnnonces';
-import Test from './TestsenData';
+import FicheAnnonces from './FicheAnnonces';
 import Annonces from './Annonces';
 
 
@@ -86,6 +86,10 @@ const MainRouter = () => {
         return;
     }
 
+    
+  
+      
+
 
     
 }))
@@ -100,15 +104,13 @@ const MainRouter = () => {
                         <Route exact path="/" component={Home}/>
                     
                         <Route exact path="/TemplateFiche" component={TemplateFiche}/>
-                        
-                        
                         <Route exact path="/Home" component={Home}/>
                         <Route exact path="/Inscription" component={Inscription}/>
                         <Route exact path="/Login" component={Login}/>
                         <Route exact path="/ContactezNous" component={ContactezNous}/>
                         <Route exact path="/PostAnnonces" component={PostAnnonces}/>
                         <Route exact path="/Annonces" component={Annonces}/>
-                        <Route exact path="/TestsenData" component={Test}/>
+                        <Route exact path="/FicheAnnonces" component={FicheAnnonces}/>
                         <Route exact path="/Administration" component={Administration}/>
                         <Route exact path="/Reservation" component={Reservation}/> 
                         <Route exact path="/QuiSommesNous" component={QuiSommesNous}/>

@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { storage } from './Fire';
 import { firebase } from './Fire';
+
 import { Form, Col, Row, Button} from 'react-bootstrap';
 import Select from 'react-select';
 import db from './Fire';
@@ -91,16 +92,23 @@ class PostAnnonces extends React.Component {
     }*/
 
     
-   writePostA(e) {
+   async writePostA(e) {
     e.preventDefault()
     const {image} = this.state;
     let docRef = firebase.firestore().collection('PostHab').doc();
-    storage.ref(`images/${image.name}`).put(image);
-      storage.ref('images').child(image.name).getDownloadURL().then(url => {
+    const imageRef = storage.ref().child(`images/${docRef.id}`);
+    console.log('storing imqge');
+    await imageRef.put(image);
+    console.log('storing imqge done');
+    const url = await imageRef.getDownloadURL()
+   
+    console.log('get url done')
     console.log(url);
-    this.setState({ url });
+    this.setState({ url })
 
-    let setPostH = docRef.set({
+    console.log('storing doc')
+
+    await docRef.set({
       title: this.state.title,
       city: this.state.city,
       typehab: this.state.typehab,
@@ -111,11 +119,9 @@ class PostAnnonces extends React.Component {
       selectBed: this.state.selectBed,
       url: url,
 
-    })
-    
-    }); 
+    });
+    console.log('storing doc done')
 
- 
     }
    
 
@@ -181,12 +187,11 @@ class PostAnnonces extends React.Component {
                   <Form.Control type="Text" onChange={this.handleChange} value={this.state.price} name="price"/>
                 </Form.Group>
 
-                <Form Group as={Col} controlId="FormImage">
+                <Form.Group as={Col} controlId="FormImage">
                   <Form.Label>Images</Form.Label>
                   <Form.Control type="file" onChange={this.handleChangeImg}/>
-                  
-                  
-                </Form>
+                  </Form.Group>
+                
             </Form.Row>
 
             <Button onClick={this.writePostA} onChange={this.handleChange} variant="primary" type="submit">
