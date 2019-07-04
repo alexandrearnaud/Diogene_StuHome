@@ -1,8 +1,9 @@
 import { firebase } from './Fire';
-import { useState, useEffect } from 'react';
-import { storage } from './Fire';
+// import { useState, useEffect } from 'react';
+// import { storage } from './Fire';
+import { Link, Route } from 'react-router-dom';
 import React, { Component } from 'react';
-import { Form, Col, Row, Button} from 'react-bootstrap';
+import { Form, Col, Row, Button } from 'react-bootstrap';
 import { IoIosHome, IoIosMedal, IoLogoEuro, IoIosPhotos } from 'react-icons/io';
 import { Container, Card, Carousel, Image } from 'react-bootstrap';
 import Select from 'react-select';
@@ -12,150 +13,176 @@ import Select from 'react-select';
 
 
 
-    
-class FicheAnnonces extends React.Component{
 
-    constructor(props){
-        super(props);
-        this.retriveData = this.retriveData.bind(this);
-        this.state = {
+class FicheAnnonces extends React.Component {
 
-          title:'',
-          city:'',
-          typehab:'',
-          nbtravprice:'',
-          rankhost:'',
-          selectRoom:'',
-          selectBed:'',
-          url:'',
-          image: null,
+  constructor(props) {
+    super(props);
+    this.retriveDataA = this.retriveDataA.bind(this);
+    this.state = {
 
-        }
-        
+      title: '',
+      city: '',
+      typehab: '',
+      nbtravprice: '',
+      rankhost: '',
+      selectRoom: '',
+      selectBed: '',
+      url: '',
+      image: null,
 
-           
     }
-  
-    retriveData(e){
-         e.preventDefault();
-         let PostHRef = firebase.firestore.collection('PostHab').where('title', '==', 'Las Noches' );
-         let query = PostHRef.get()
-        .then(snapshot  => {
+  }
+
+  componentWillMount(prevProps) {
+    // compare id changed
+    // if (true) {
+    if (!prevProps || this.props.match.params.ficheid !== prevProps.match.params.ficheid) {
+      this.retriveDataA();
+    }
+  }
+
+  retriveDataA() {
+    // e.preventDefault();
+    let PostHRef = firebase.firestore().collection('PostHab').where('title', '==', this.props.match.params.ficheid);
+    let query = PostHRef.get()
+      .then(snapshot => {
         if (snapshot.empty) {
-      console.log('No matching value.');
-      return;
-    }  
-    snapshot.forEach(doc => {
-      console.log(doc.id, '=>', doc.data());
-      const title = (doc.data().title);
-      const city = (doc.data().city);
-      const typehab = (doc.data().typehab);
-      const nbtrav = (doc.data().nbtrav);
-      const price = (doc.data().price);
-      const rankhost = (doc.data().rankhost);
-      const selectRoom = (doc.data().selectRoom);
-      const selectBed = (doc.data().selectBed);
-      const url = (doc.data().url);
-      this.setState({
-        title,
+          console.log('No matching value.');
+          return;
+        }
+        snapshot.forEach(doc => {
+          console.log(doc.id, '=>', doc.data());
+          // this.setState(doc.data());
+          this.setState({
+            title: (doc.data().title),
+            city: (doc.data().city),
+            typehab: (doc.data().typehab),
+            nbtrav: (doc.data().nbtrav),
+            price: (doc.data().price),
+            rankhost: (doc.data().rankhost),
+            selectRoom: (doc.data().selectRoom),
+            selectBed: (doc.data().selectBed),
+            url: (doc.data().url),
+          })
+
+
+
+        });
+
       })
-    }); 
+      .catch(err => {
+        console.log('Error getting documents', err);
+      });
+  }
+
+  retriveDataH() {
+    let PostHRef = firebase.firestore().collection('user');
+    let query = PostHRef.get('url')
+      .then(snapshot => {
+        if (snapshot.empty) {
+          console.log('No matching value.');
+          return;
+        }
+        snapshot.forEach(doc => {
+          console.log(doc.id, '=>', doc.data());
+          // this.setState(doc.data());
+          this.setState({
+            urlAuthor: (doc.data().url),
+          })
+
+
+
+        });
+
+      })
+      .catch(err => {
+        console.log('Error getting documents', err);
+      });
+  }
+
   
-  })
-  .catch(err => {
-    console.log('Error getting documents', err);
-  });
+
+
+
+
+  render() {
+    console.log('props:', this.props);
+    const { title, city, typehab, nbtrav, price, rankhost, selectRoom, selectBed, author, url } = this.state;
+    const { urlAuthor } = this.state;
+    console.log('state:', this.state);
+
+    const LinkStyle = {
+      color: 'white',
+      textDecoration: 'none',
     }
-   
+    return (
+      <div className="FicheA">
+        <Card className="CardStyle">
+
+          <img
+            className="d-block w-100"
+            src={'https://firebasestorage.googleapis.com/v0/b/diogenestuhome.appspot.com/o/images%2F005b1ff6515380a1a5b1.jpeg?alt=media&token=36e777ef-31c9-4363-9004-af57469f95a8'}
+            style={{ width: "100%", height: "100%" }}
+            alt="First slide"
+          />
 
 
 
-    render(){
-        return (
-            <div className="FicheA">
-                <Card className="CardStyle">
-            <Carousel>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src={'https://firebasestorage.googleapis.com/v0/b/diogenestuhome.appspot.com/o/images%2Fdragon-age-inquisition-17012014-092315-002.jpg?alt=media&token=6053c2e1-94dd-4fbb-8cff-78df60d5c39e'}
-                  style={{width: "100%", height: "100%"}}
-                  alt="First slide"
-                />
-                </Carousel.Item>
-
-                <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src={'https://firebasestorage.googleapis.com/v0/b/diogenestuhome.appspot.com/o/images%2Fchernobyl_wolves-wallpaper-1680x1050.jpg?alt=media&token=73ca89cc-df4c-4be2-a2e7-a6a9a80ca84b'}
-                  style={{width: "100%", height: "100%"}}
-                  alt="First slide"
-                />
-                </Carousel.Item>
-
-                <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src={'https://firebasestorage.googleapis.com/v0/b/diogenestuhome.appspot.com/o/images%2F005b1ff6515380a1a5b1.jpeg?alt=media&token=36e777ef-31c9-4363-9004-af57469f95a8'}
-                  style={{width: "100%", height: "100%"}}
-                  alt="First slide"
-                />
-                </Carousel.Item>
-                
-            </Carousel>
-                <Card.Body>
-                <Card.Text>
-                <Container>
-                    <Row>
-                        <Col xs={6} ><h1 onChange={this.retriveData} ></h1></Col>
-                        <Col xs={3}> <IoIosMedal/> SuperHôte</Col>
-                        <Col xs={3}> <IoLogoEuro/> <strong> Prix : </strong>  {}€ / nuit</Col>
-                    </Row>
-                    <Row>
-                        <Col xs={6}><p>{this.state.city}</p> </Col>
-                        <Col xs={5}> </Col>
-                        <Col></Col>
-                    </Row>
-                    <Row>
-                        <Col xs={6}><IoIosHome/> Loft entier </Col>
-                        <Col xs={4}></Col>
-                        <Col xs={2} style={{
-    justifyContent: 'center',
-    alignItems: 'center'}}> <a href="../TemplateProfil"><Image 
-                        src={'https://firebasestorage.googleapis.com/v0/b/diogenestuhome.appspot.com/o/images%2Fc1mfMLODriBAcu8a8btO?alt=media&token=765f3f02-cdf5-40d6-9b17-ca7f7d6dcac2'}
-                        style={{height: "100%", width: "40%"}} roundedCircle
-                        /></a>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col xs={6}><p> 11 voyageurs - 4 chambres - 9 lits - 3 salles de bain</p> </Col>
-                        <Col xs={4}></Col>
-                        <Col style={{textAlign: "center"}}> Jean-Christophe</Col>
-                    </Row>
-                    <Row>
-                        <Col xs={6}><p> <IoIosMedal/> Frank est un SuperHôte </p> </Col>
-                        <Col xs={5}></Col>
-                        <Col></Col>
-                    </Row>
-                    <Row>
-                        <Col xs={6}><p> Les SuperHôtes sont des hôtes expérimentés qui bénéficient de très bonnes évaluations et qui s'engagent à offrir d'excellents séjours aux voyageurs. </p> </Col>
-                        <Col xs={5}></Col>
-                        <Col></Col>
-                    </Row>
-                    <Row>
-                    <Button Link to="/Reservation" variant="primary" type="link">
-                    Reserver
-                   </Button>
-                    </Row>
-                    </Container>
-                </Card.Text>
-                </Card.Body>
-            </Card>
-            </div>
-        )
-    }
-
-
+          <Card.Body>
+            <Card.Text>
+              <Container>
+                <Row>
+                  <Col xs={6} ><h1>{title}</h1></Col>
+                  <Col xs={3}> <IoIosMedal /> {rankhost} </Col>
+                  <Col xs={3}> <IoLogoEuro /> <strong> Prix : </strong>  {price}€ / nuit</Col>
+                </Row>
+                <Row>
+                  <Col xs={6}><p>{city}</p> </Col>
+                  <Col xs={5}> </Col>
+                  <Col></Col>
+                </Row>
+                <Row>
+                  <Col xs={6}><IoIosHome /> {typehab} </Col>
+                  <Col xs={4}></Col>
+                  <Col xs={2} style={{
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}> <a href="../TemplateProfil"><Image
+                    src={'https://firebasestorage.googleapis.com/v0/b/diogenestuhome.appspot.com/o/images%2F328249.jpg?alt=media&token=732729ff-5b94-4943-9fe5-6635d5d22aed'}
+                    style={{ height: "100%", width: "40%" }} roundedCircle
+                  /></a>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={6}><p> {nbtrav} voyageurs - {selectRoom} chambres - {selectBed} lits </p> </Col>
+                  <Col xs={4}></Col>
+                  <Col style={{ textAlign: "center" }}> {author} </Col>
+                </Row>
+                <Row>
+                  <Col xs={6}><p> <IoIosMedal /> Frank est un Hôte de rang {rankhost} </p> </Col>
+                  <Col xs={5}></Col>
+                  <Col></Col>
+                </Row>
+                <Row>
+                  <Col xs={6}><p> Les SuperHôtes sont des hôtes expérimentés qui bénéficient de très bonnes évaluations et qui s'engagent à offrir d'excellents séjours aux voyageurs. </p> </Col>
+                  <Col xs={5}></Col>
+                  <Col></Col>
+                </Row>
+                <Row>
+                  <Button>
+                    <Link to="/Reservation" style={LinkStyle}> Reserver </Link>
+                  </Button>
+                </Row>
+              </Container>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </div>
+    )
+  }
 }
+
+
 
 export default FicheAnnonces;

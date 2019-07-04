@@ -39,9 +39,6 @@ class App extends Component {
   render() {
     return (
       <div className="Home">
-      
-//https://www.youtube.com/watch?v=r4EsP6rovwk
-
           <h1> Bienvenue sur notre site Stuhome </h1>
           <div style={{width: "100%"}}>
             <Carousel>

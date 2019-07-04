@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import { storage } from './Fire';
 import { firebase } from './Fire';
-
 import { Form, Col, Row, Button} from 'react-bootstrap';
 import Select from 'react-select';
 import db from './Fire';
@@ -43,6 +42,7 @@ class PostAnnonces extends React.Component {
           price:'',
           selectRoom:'',
           selectBed:'',
+          author:'',
           image: null,
           url: '',
 
@@ -70,26 +70,7 @@ class PostAnnonces extends React.Component {
     };
   
 
-    /*handleSubmit(e){
-      e.preventDefault()
-      console.log(this.state);
-    }
     
-    handleUpload = () => {
-      const {image} = this.state;
-      const uploadTask = storage.ref(`images/${image.name}`).put(image);
-      uploadTask.on('state_changed', 
-      (error) => {
-        console.log(error);
-      }, 
-    () => {
-        storage.ref('images').child(image.name).getDownloadURL().then(url => {
-            console.log(url);
-            this.setState({url})
-        })
-
-    });
-    }*/
 
     
    async writePostA(e) {
@@ -117,6 +98,7 @@ class PostAnnonces extends React.Component {
       price: this.state.price,
       selectRoom: this.state.selectRoom,
       selectBed: this.state.selectBed,
+      author:this.state.author,
       url: url,
 
     });
@@ -151,12 +133,18 @@ class PostAnnonces extends React.Component {
               <Form.Label>Type Habitation</Form.Label>
               <Form.Control type="Text" placeholder="Type d'habitation" onChange={this.handleChange} value={this.state.lastname} name="typehab"/>
             </Form.Group>
+
+            <Form.Group as={Col} controlId="formGridVille" >
+              <Form.Label>Auteur</Form.Label>
+              <Form.Control type="Text" placeholder="Ville" onChange={this.handleChange} value={this.state.lastname} name="city"/>
+            </Form.Group>
+
           </Form.Row>
 
           <Form.Row>
             <Form.Group as={Col} controlId="formGridNbTrav" >
               <Form.Label>Nombres voyageurs</Form.Label>
-              <Form.Control type="Text" placeholder="Nombre de voyageurs" onChange={this.handleChange} value={this.state.lastname} name="nbtrav"/>
+              <Form.Control type="Text" placeholder="Nombre de voyageurs" onChange={this.handleChange} value={this.state.nbtrav} name="nbtrav"/>
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridNbRoom" >

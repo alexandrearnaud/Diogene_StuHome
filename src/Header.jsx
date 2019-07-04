@@ -27,11 +27,8 @@ class Header extends Component {
             color : 'white', 
             textDecoration: 'none',
             paddingRight: '10px'
-          };
-
-       
-        
-        
+          }
+          console.log("user" + this.props.user);
 
         return (
                 <div className="Header">
@@ -54,13 +51,20 @@ class Header extends Component {
                                     </Link>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                
+                                {this.props.user ? 
+                                    ''
+                                    :
+                                    <li class="nav-item">
                                     <a class="nav-link"> <Link to="/Login" style={LinkStyle}>Connexion </Link></a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link"> <Link to="/Inscription" style={LinkStyle}> Inscription </Link></a>
                                 </li>
-                            
+                                    
+                                }
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link"> <Link to="/Annonces" style={LinkStyle}> Annonces </Link></a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link"> <Link to="/TemplateFiche" style={LinkStyle}> TemplateAnnonce </Link></a>
                                 </li>
