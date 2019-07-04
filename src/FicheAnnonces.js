@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { Form, Col, Row, Button } from 'react-bootstrap';
 import { IoIosHome, IoIosMedal, IoLogoEuro, IoIosPhotos } from 'react-icons/io';
 import { Container, Card, Carousel, Image } from 'react-bootstrap';
-import Select from 'react-select';
+
 
 /* Variables de l'annonce*/
 
@@ -34,24 +34,20 @@ class FicheAnnonces extends React.Component {
     }
   }
 
-  componentWillMount(prevProps) {
-    // compare id changed
-    // if (true) {
-    if (!prevProps || this.props.match.params.ficheid !== prevProps.match.params.ficheid) {
+  componentDidMount() {
+    console.log('will mount');
       this.retriveDataA();
-    }
   }
 
   retriveDataA() {
     // e.preventDefault();
-    let PostHRef = firebase.firestore().collection('PostHab').where('title', '==', this.props.match.params.ficheid);
+    let PostHRef = firebase.firestore().collection('PostHab').doc(this.props.match.params.ficheid);
     let query = PostHRef.get()
-      .then(snapshot => {
-        if (snapshot.empty) {
+      .then(doc => {
+        if (!doc) {
           console.log('No matching value.');
           return;
         }
-        snapshot.forEach(doc => {
           console.log(doc.id, '=>', doc.data());
           // this.setState(doc.data());
           this.setState({
@@ -65,43 +61,13 @@ class FicheAnnonces extends React.Component {
             selectBed: (doc.data().selectBed),
             url: (doc.data().url),
           })
-
-
-
-        });
-
       })
       .catch(err => {
         console.log('Error getting documents', err);
       });
   }
 
-  retriveDataH() {
-    let PostHRef = firebase.firestore().collection('user');
-    let query = PostHRef.get('url')
-      .then(snapshot => {
-        if (snapshot.empty) {
-          console.log('No matching value.');
-          return;
-        }
-        snapshot.forEach(doc => {
-          console.log(doc.id, '=>', doc.data());
-          // this.setState(doc.data());
-          this.setState({
-            urlAuthor: (doc.data().url),
-          })
 
-
-
-        });
-
-      })
-      .catch(err => {
-        console.log('Error getting documents', err);
-      });
-  }
-
-  
 
 
 
@@ -109,7 +75,6 @@ class FicheAnnonces extends React.Component {
   render() {
     console.log('props:', this.props);
     const { title, city, typehab, nbtrav, price, rankhost, selectRoom, selectBed, author, url } = this.state;
-    const { urlAuthor } = this.state;
     console.log('state:', this.state);
 
     const LinkStyle = {
@@ -122,7 +87,7 @@ class FicheAnnonces extends React.Component {
 
           <img
             className="d-block w-100"
-            src={'https://firebasestorage.googleapis.com/v0/b/diogenestuhome.appspot.com/o/images%2F005b1ff6515380a1a5b1.jpeg?alt=media&token=36e777ef-31c9-4363-9004-af57469f95a8'}
+            src={url}
             style={{ width: "100%", height: "100%" }}
             alt="First slide"
           />
@@ -155,12 +120,12 @@ class FicheAnnonces extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={6}><p> {nbtrav} voyageurs - {selectRoom} chambres - {selectBed} lits </p> </Col>
+                  <Col xs={6}><p> {nbtrav} voyageurs - {selectRoom.value} chambres - {selectBed.value} lits </p> </Col>
                   <Col xs={4}></Col>
                   <Col style={{ textAlign: "center" }}> {author} </Col>
                 </Row>
                 <Row>
-                  <Col xs={6}><p> <IoIosMedal /> Frank est un Hôte de rang {rankhost} </p> </Col>
+                  <Col xs={6}><p> <IoIosMedal /> {author} est un Hôte de rang {rankhost} </p> </Col>
                   <Col xs={5}></Col>
                   <Col></Col>
                 </Row>

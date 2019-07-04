@@ -15,7 +15,7 @@ import Select from 'react-select';
   ];
 
   const options2 = [ 
-    { value : 'Prop', label : 'Propriétaire'},
+    { value : 'Prop', label : 'Proprietaire'},
     { value : 'Etudiant', label : 'Etudiant'},
   ];
 
@@ -183,7 +183,12 @@ return (
 
           <Form.Group controlId="formGridAddress" >
             <Form.Label>Adresse</Form.Label>
-            <Form.Control type='Text' placeholder='' onChange={this.handleChange} value={this.state.address} name='address'/>
+            <Form.Control type='Text' placeholder='Adresse' onChange={this.handleChange} value={this.state.address} name='address'/>
+          </Form.Group>
+
+          <Form.Group controlId="formGridAddress" >
+            <Form.Label>Telephone</Form.Label>
+            <Form.Control type='Text' placeholder='Telephone' onChange={this.handleChange} value={this.state.telephone} name='telephone'/>
           </Form.Group>
           
           <Form.Row>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link, Route} from 'react-router-dom';
 import logo from './img/logo3.png';
-import firebase from './Fire';
+import { firebase } from './Fire';
 import MainRouter from './routes.js';
 
 class Header extends Component {
@@ -11,16 +11,7 @@ class Header extends Component {
         
       }
 
-       signOut(e){
-        console.log("Deconnectez vous");
-        e.preventDefault();
-        firebase.auth().signOut().then(function() {
-            console.log("Deconnction");
-        }, function(error){
-            console.error('Erreur pendant la deconnection', error);
-        });
-        document.location.href = '/';
-    };
+      
 
     render() {
         const LinkStyle = {
@@ -28,8 +19,9 @@ class Header extends Component {
             textDecoration: 'none',
             paddingRight: '10px'
           }
-          console.log("user" + this.props.user);
+          console.log("user", this.props.user);
 
+      
         return (
                 <div className="Header">
                     <header>
@@ -52,38 +44,47 @@ class Header extends Component {
                                     </a>
                                 </li>
                                 
-                                {this.props.user ? 
-                                    ''
-                                    :
-                                    <li class="nav-item">
-                                    <a class="nav-link"> <Link to="/Login" style={LinkStyle}>Connexion </Link></a>
-                                    <a class="nav-link"> <Link to="/Inscription" style={LinkStyle}> Inscription </Link></a>
-                                </li>
-                                    
-                                }
                                 
-                                <li class="nav-item">
-                                    <a class="nav-link"> <Link to="/Annonces" style={LinkStyle}> Liste des Annonces </Link></a>
-                                </li>
-                                <li class="nav-item">
-<<<<<<< HEAD
-                                    <a class="nav-link"> <Link to="/TemplateFiche" style={LinkStyle}> TemplateAnnonce </Link></a>
-                                </li>
+                                <li>
+                                    
+                                   
+                                    <li class="nav-item">
+                                        <a class="nav-link"> <Link to="/Login" style={LinkStyle}>Connexion </Link></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"> <Link to="/Inscription" style={LinkStyle}> Inscription </Link></a>
+                                    </li>
+                                    </li>
+                
+                                    <li class="nav-item">
+                                        <a class="nav-link"> <Link to="/Profil" style={LinkStyle}> Profil </Link></a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link"> <Link to="/FicheAnnonces" style={LinkStyle}> Fiche Annonce </Link></a>
-=======
-                                    <a class="nav-link"> <Link to="/TemplateFiche" style={LinkStyle}> Template Annonce </Link></a>
->>>>>>> 654d0cf64e17030c7cc22eb1e05fa31c09e5fa21
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link"> <Link to="/PostAnnonces" style={LinkStyle}> Poster une Annonce </Link></a>
-                                </li>
+                                   
+                                    <li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"> <Link to="/Annonces" style={LinkStyle}> Liste des Annonces </Link></a>
+                                    </li>
+                                   
+                    
+                                     </li>
 
+                                     
+                                
+                                     <li class="nav-item">
+                                     <a class="nav-link"> <Link to="/PostAnnonces" style={LinkStyle}> Poster une Annonce </Link></a>
+                                     </li>
+                                    
+                                    
+                                    
+                                
+            
+                               
                                 </ul>
                             
                                     <a class="nav-link"> <Link to="/TemplateProfil" style={LinkStyle}> Profil </Link></a>
                                 <form class="form-inline my-1 my-lg-1">
+                                
                                 <button class="btn btn-secondary my-2 my-sm-0" type="submit" onClick={this.signOut}> Deconnexion </button>
                                 </form>
 

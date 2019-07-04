@@ -103,6 +103,7 @@ class PostAnnonces extends React.Component {
 
     });
     console.log('storing doc done')
+    alert('Annonce Postée');
 
     }
    
@@ -121,22 +122,22 @@ class PostAnnonces extends React.Component {
 
           <Form.Group as={Col} controlId="formGridTypeHab" >
               <Form.Label>Titre de l'annonce</Form.Label>
-              <Form.Control type="Text" placeholder="Titre" onChange={this.handleChange} value={this.state.lastname} name="title"/>
+              <Form.Control type="Text" placeholder="Titre" onChange={this.handleChange} value={this.state.title} name="title"/>
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridVille" >
               <Form.Label>Ville</Form.Label>
-              <Form.Control type="Text" placeholder="Ville" onChange={this.handleChange} value={this.state.lastname} name="city"/>
+              <Form.Control type="Text" placeholder="Ville" onChange={this.handleChange} value={this.state.city} name="city"/>
             </Form.Group>
 
           <Form.Group as={Col} controlId="formGridTypeHab" >
               <Form.Label>Type Habitation</Form.Label>
-              <Form.Control type="Text" placeholder="Type d'habitation" onChange={this.handleChange} value={this.state.lastname} name="typehab"/>
+              <Form.Control type="Text" placeholder="Type d'habitation" onChange={this.handleChange} value={this.state.typehab} name="typehab"/>
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridVille" >
               <Form.Label>Auteur</Form.Label>
-              <Form.Control type="Text" placeholder="Ville" onChange={this.handleChange} value={this.state.lastname} name="city"/>
+              <Form.Control type="Text" placeholder="Auteur" onChange={this.handleChange} value={this.state.author} name="author"/>
             </Form.Group>
 
           </Form.Row>

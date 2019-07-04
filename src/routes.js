@@ -37,7 +37,7 @@ const MainRouter = () => {
             snapshot => {
                 const userSnapshot = snapshot.data();
                 if (snapshot.exists){
-                    if (userSnapshot.status === 'Admin'){
+                    if (userSnapshot.status.label === 'Admin'){
                         setUser({
                             isEtudiant: true,
                             user: authUser,
@@ -49,7 +49,7 @@ const MainRouter = () => {
                             uid: authUser.uid
                             
                         });   
-                    }else if(userSnapshot.status === 'Etudiant'){
+                    }else if(userSnapshot.status.label === 'Etudiant'){
                         setUser({
                             isEtudiant: true,
                             authDone: true,
@@ -58,7 +58,7 @@ const MainRouter = () => {
                             email: authUser.email,
                             uid: authUser.uid
                         });
-                    }else if(userSnapshot.status === "Proprietaire"){
+                    }else if(userSnapshot.status.label === 'Proprietaire'){
                             setUser({
                             isProprietaire: true,
                             authDone: true,
@@ -68,8 +68,16 @@ const MainRouter = () => {
                             uid: authUser.uid
                         });
                     }else {
-                        console.log('error');
-                    } 
+                        console.log('error invalid user doc');
+                        setUser({
+                            isGuest: true,
+                            isAdmin: false,
+                            isProprietaire: false,
+                            authDone: false,
+                            email : null,
+                            uid: null,
+                            });
+                        } 
                 }
                 else {
                         setUser({
@@ -110,6 +118,7 @@ const MainRouter = () => {
                         <Route exact path="/ContactezNous" component={ContactezNous}/>
                         <Route exact path="/PostAnnonces" component={PostAnnonces}/>
                         <Route exact path="/Annonces" component={Annonces}/>
+                        
                         <Route exact path="/FicheAnnonces/:ficheid" component={FicheAnnonces}/>
                         <Route exact path="/Administration" component={Administration}/>
                         <Route exact path="/Reservation" component={Reservation}/> 
