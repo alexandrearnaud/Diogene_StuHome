@@ -45,14 +45,10 @@ class Header extends Component {
                                 }
                                 
                                 <li class="nav-item">
-                                    <a class="nav-link"> <Link to="/Annonces" style={LinkStyle}> Annonces </Link></a>
+                                    <a class="nav-link"> <Link to="/Annonces" style={LinkStyle}> Liste des Annonces </Link></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link"> <Link to="/TemplateFiche" style={LinkStyle}> TemplateAnnonce </Link></a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link"> <Link to="/TemplateProfil" style={LinkStyle}> Template Profil </Link></a>
+                                    <a class="nav-link"> <Link to="/TemplateFiche" style={LinkStyle}> Template Annonce </Link></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link"> <Link to="/PostAnnonces" style={LinkStyle}> Poster une Annonce </Link></a>
@@ -60,12 +56,9 @@ class Header extends Component {
 
                                 </ul>
                             
+                                    <a class="nav-link"> <Link to="/TemplateProfil" style={LinkStyle}> Profil </Link></a>
                                 <form class="form-inline my-1 my-lg-1">
                                 <button class="btn btn-secondary my-2 my-sm-0" type="submit" onClick={this.signOut}> Deconnexion </button>
-                                </form>
-
-                                <form class="form-inline my-2 my-lg-0">
-                                <button class ="btn btn-secondary my-2 my-sm-0" type="submit">Recherche</button>
                                 </form>
 
                             </div>
